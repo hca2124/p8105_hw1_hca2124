@@ -5,6 +5,7 @@ date: "2026-10-07"
 output: github_document
 ---
 
+#Question1
 ```{r}
 library(tidyverse)
 ```
@@ -37,4 +38,38 @@ flipper_bill_plot =
 flipper_bill_plot 
 ggsave("flipper_bill_plot.pdf")
 ```
+
+#Question2
+```{r}
+df_penguins <- tibble(
+  norm_samp = rnorm(10),
+  logical_vector = norm_samp > 0,
+  character_vector = c ("a", "b", "c", "d", "e", "f", "g", "h", "i", "j"),
+  factor_vec = factor(c("low", "medium", "high", "low", "medium", "high", "low", "medium", "high", "low"))
+)
+```
+
+```{r}
+mean(pull(df_penguins, norm_samp))
+mean(pull(df_penguins, logical_vector))
+mean(pull(df_penguins, character_vector))
+mean(pull(df_penguins, factor_vec))
+     
+```
+
+The mean for norm_samp and logical_vector worked.
+The mean for the character variable does not work as letters cannot be averaged since they are not numeric.
+The mean for the factor variable does not work for the same reason, they are not numeric and cannot be averaged.
+
+```{r}
+as.numeric(pull(df_penguins, logical_vector))
+as.numeric(pull(df_penguins, character_vector))
+as.numeric(pull(df_penguins, factor_vec))
+```
+When applying as.numeric, logical_vector worked because R converts the variables to 1 and 0, which explains the earlier mean of 0.6 as there are six [1]s and four [0]s. The character vector did not work as the letters could not be read as numerical and replaced with NA. The factor vector worked as it gave a numerical value of 1,2,or 3 to each category.
+
+
+
+
+
 
