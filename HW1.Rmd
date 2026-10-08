@@ -1,0 +1,40 @@
+---
+title: "p8105_hw1_hca2124"
+author: "Helene Apollon"
+date: "2026-10-07"
+output: github_document
+---
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+data("penguins", package = "palmerpenguins")
+names (penguins)
+penguins = janitor::clean_names(penguins)
+```
+
+The 'penguins' dataset includes different measurments of penguins and their body parts.
+It has 'r nrow(penguins)' rows and 'r ncol(penguins)' columns. 
+The mean flipper length is 'r mean(pull(penguins, flipper_length_mm), na.rm = TRUE)'
+
+```{r}
+skimr::skim(penguins)
+mean(pull(penguins, flipper_length_mm), na.rm = TRUE)
+```
+```{r}
+round(mean(penguins$flipper_length_mm, na.rm = TRUE), 2)
+```
+The mean flipper_length_mm is 200.92 with standard deviaition of 14.06
+
+```{r}
+library(tidyverse)
+flipper_bill_plot =
+  ggplot(penguins, aes(x = bill_length_mm,
+                       y = flipper_length_mm, color = species)) + 
+  geom_point() 
+flipper_bill_plot 
+ggsave("flipper_bill_plot.pdf")
+```
+
